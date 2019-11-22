@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\{VideoTag, YouTubeTag, VimeoTag};
+use App\Services\{VideoRenderer, VideoTag, YouTubeTag, VimeoTag};
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -14,18 +14,20 @@ class VideoController extends Controller
      */
     public function index()
     {
+        $html = "";
+
         $videos = [
-        	new VideoTag('my_video_file.mp4'),
-        	new YouTubeTag('hVfUyO'),
-			new VimeoTag('12872530894'),  // will throw an Exception
-			new VimeoTag(12872530894),  // will render as expected
+        	new YouTubeTag('IWL3VlwiTxU'),
+        	new YouTubeTag('bVQpwxgMQCg'),
+//			new VimeoTag(98651011234),
+//			new VideoTag('my_video_file.mp4'),
 		];
 
 
-        $html = "";
 
-        foreach($videos as $video) {
-        	$html .= $video->render();
+        foreach($videos as $video)
+        {
+        	$html .= (new VideoRenderer($video))->render();
 		}
 
 		return view('home', compact('html'));
