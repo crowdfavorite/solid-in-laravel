@@ -32,4 +32,15 @@ class Director extends Model implements SalaryInterface
 	{
 		return $this->fixed_month * (1 + $this->start_date->diffInMonths(now()) * $this->monthly_percentage);
 	}
+	
+	// Often directors/founders/board members dont get monthly salaries but get their revenue in yearly dividents and they
+	// reinvest their revenue in the company.
+	// However, the Director model is forced by the SalaryInterface to implement a method that is not used by this model.
+	// This violates the Interface segregation principle.
+	// To avoid this, the payMonthlySalary should be in a different interface and make our class implement both interfaces.
+
+	public function payMonthlySalary()
+	{
+		return null;
+	}
 }

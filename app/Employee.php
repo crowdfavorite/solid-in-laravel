@@ -2,10 +2,11 @@
 
 namespace App;
 
-use App\Interfaces\SalaryInterface;
+use App\Interfaces\{SalaryInterface, PaySalaryInterface};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//class Employee extends Model implements SalaryInterface, PaySalaryInterface
 class Employee extends Model implements SalaryInterface
 {
 	use SoftDeletes;
@@ -29,5 +30,11 @@ class Employee extends Model implements SalaryInterface
     public function calculateSalary()
 	{
 		return $this->hours_worked * $this->hourly_rate;;
+	}
+
+	public function payMonthlySalary()
+	{
+		// Transaction::create();
+		// TODO: Implement paySalary() method.
 	}
 }

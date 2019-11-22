@@ -12,4 +12,6 @@ namespace App\Interfaces;
 interface SalaryInterface
 {
 	public function calculateSalary();
+
+	public function payMonthlySalary();
 }
